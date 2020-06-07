@@ -17,6 +17,7 @@ app.get("/request/url/:region", (req, res) => {
 
 app.get("/request/set-cookie", (req, res) => {
     res.cookie('name', 'hassan');
+    res.cookie('secure-cookie', 't0PZ3Cr3T', {httpOnly: true});
     res.send(200, "Cookie set");
 });
 
