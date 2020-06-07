@@ -15,6 +15,11 @@ app.get("/request/url/:region", (req, res) => {
     res.send("Request query region is: " + req.params.region)
 });
 
+app.get("/request/set-cookie", (req, res) => {
+    res.cookie('name', 'hassan');
+    res.send(200, "Cookie set");
+});
+
 var server = http.createServer(app).listen(8081);
 
 console.log("Listening ON prt: " + server.address().port);
