@@ -1,10 +1,18 @@
 var express = require('express');
 var http = require('http');
+var dotenv = require('dotenv');
 
 var app = express();
+dotenv.config();
 
 app.get("/", (req, res) => {
-    res.send("Assalam-o-Alaikum");
+    if(process.env.GREETING==='islam')
+    {
+        res.send("Assalam-o-Alaikum");
+    }
+    else {
+            res.send("Halo");
+        }
 });
 
 app.get("/request/url", (req, res) => {
