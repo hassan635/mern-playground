@@ -10,6 +10,11 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use((req, res, next) => {
+    console.log("Root MWARE: Request path is: " + req.path);
+    next();
+});
+
 app.get("/", (req, res) => {
     if(process.env.GREETING==='islam')
     {
@@ -25,12 +30,12 @@ function logIp(req, res, next){
     next();
 }
 
-function logPath(req, res, next){
-    console.log("Request path is: " + req.path);
+function logMethod(req, res, next){
+    console.log("Request method is: " + req.method);
     next();
 }
 
-var requestDetailsLogger = [logIp, logPath];
+var requestDetailsLogger = [logIp, logMethod];
 
 app.get("/mware/request/logger", requestDetailsLogger, (req, res, next) =>{
     res.send("Done");
