@@ -1,6 +1,7 @@
 var express = require('express');
 var http = require('http');
 var dotenv = require('dotenv');
+var routes = require('../routes');
 
 var app = express();
 dotenv.config();
@@ -55,6 +56,9 @@ app.get("/request/set-cookie", (req, res) => {
     res.cookie('secure-cookie', 't0PZ3Cr3T', {httpOnly: true});
     res.send(200, "Cookie set");
 });
+
+app.use("/section1", routes);
+app.use("/section2", routes);
 
 var server = http.createServer(app).listen(8081);
 
