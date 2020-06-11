@@ -1,7 +1,7 @@
 var express = require('express');
 var http = require('http');
 var dotenv = require('dotenv');
-var routes = require('../routes');
+var routes = require('../routes/routes.js');
 
 var app = express();
 dotenv.config();
@@ -16,6 +16,8 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use("/section1", routes);
+
 app.get("/", (req, res) => {
     if(process.env.GREETING==='islam')
     {
@@ -25,6 +27,9 @@ app.get("/", (req, res) => {
             res.send("Halo");
         }
 });
+
+app.use("/section2", routes);
+
 
 function logIp(req, res, next){
     console.log("Request came from: " + req.ip);
@@ -57,8 +62,7 @@ app.get("/request/set-cookie", (req, res) => {
     res.send(200, "Cookie set");
 });
 
-app.use("/section1", routes);
-app.use("/section2", routes);
+
 
 var server = http.createServer(app).listen(8081);
 

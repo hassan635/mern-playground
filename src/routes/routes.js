@@ -1,7 +1,8 @@
-const router = express.Router;
+var express = require('express');
+var router = express.Router();
 
-router.get("/about", (req, res, next) => {
-    res.send(`Captured request path ${req.path} in routes`);
+router.get("/about", (req, res) => {
+    res.send(`Captured request path ${req.baseUrl} in routes`);
 });
 
 module.exports = router;
