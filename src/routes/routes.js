@@ -6,7 +6,13 @@ router.get("/about", (req, res) => {
 });
 
 router.post("/json-endpoint", (req, res) => {
-    res.status(200).send(req.body);
+    if(req.query.isvalid === "valid")
+    {
+        res.status(200).send(req.body);
+    }
+    else{
+        res.status(400).send({message: "Invalid request"});
+    }
 });
 
 module.exports = router;
