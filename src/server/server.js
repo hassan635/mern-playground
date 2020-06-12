@@ -11,6 +11,8 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use(express.json());
+
 app.use((req, res, next) => {
     console.log("Root MWARE: Request path is: " + req.path);
     next();
