@@ -13,13 +13,14 @@ router.get("/login", (req, res) => {
     res.send("Login Page");
 });
 
+
 router.post("/json-endpoint", (req, res) => {
     if(req.query.isvalid === "valid")
     {
         res.sendStatus(200).send(req.body);
     }
     else{
-        res.sendStatus(400).send({"message": "Invalid request"});
+        res.sendStatus(400).sendJson({"message": "Invalid request"});
     }
 });
 
