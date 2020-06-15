@@ -7,6 +7,18 @@ var mongoose = require('mongoose');
 mongoose.connect("mongodb+srv://tezt:Windows.2000@cluster0-gpynn.mongodb.net/testdb?retryWrites=true&w=majority"
     , {useNewUrlParser: true, useUnifiedTopology: true});
 
+var schema = mongoose.Schema;
+
+var person_schema = new schema(
+    {
+        name: String,
+        age: Number
+    }
+);
+
+var person = mongoose.model('Person', person_schema);
+console.log(person.count);
+
 
 var app = express();
 dotenv.config();
