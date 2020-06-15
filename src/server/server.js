@@ -7,17 +7,14 @@ var mongoose = require('mongoose');
 mongoose.connect("mongodb+srv://tezt:Windows.2000@cluster0-gpynn.mongodb.net/testdb?retryWrites=true&w=majority"
     , {useNewUrlParser: true, useUnifiedTopology: true});
 
-var schema = mongoose.Schema;
+var schema = new mongoose.Schema({username: 'string', password: 'string'});
 
-var person_schema = new schema(
-    {
-        name: String,
-        age: Number
-    }
-);
+var user_model = new mongoose.model('user', schema);
+var admin_user = new user_model({username: 'root', password: 'toor'});
 
-var person = mongoose.model('Person', person_schema);
-console.log(person.count);
+admin_user.save((err) => {
+    if (err) { console.log("Can't save user");}
+});
 
 
 var app = express();
