@@ -12,6 +12,13 @@ var schema = new mongoose.Schema({username: 'string', password: 'string'});
 var user_model = new mongoose.model('user', schema);
 var admin_user = new user_model({username: 'root', password: 'toor'});
 
+user_model.find({ username: 'dev' }).where({password: 'developer'}).count((err, count) => {
+    if(err) {
+            console.log(`Error occured while fetching record. Erro details: ${err.message()}`)
+        }
+    console.log(`Total recordes fetched = ${count}`);
+});
+
 //admin_user.save((err) => {
 //    if (err) { console.log("Can't save user");}
 //});
