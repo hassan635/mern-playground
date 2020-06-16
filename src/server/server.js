@@ -12,10 +12,16 @@ var schema = new mongoose.Schema({username: 'string', password: 'string'});
 var user_model = new mongoose.model('user', schema);
 var admin_user = new user_model({username: 'root', password: 'toor'});
 
-admin_user.save((err) => {
-    if (err) { console.log("Can't save user");}
-});
+//admin_user.save((err) => {
+//    if (err) { console.log("Can't save user");}
+//});
 
+//user_model.insertMany(
+//    [
+//        {username: 'dev', password: 'developer'},
+//        {username: 'test', password: 'tester'}, 
+//        {username: 'auto', password: 'automator'}], 
+//        (err) => console.log(`Error occured: ${err.message()}`))
 
 var app = express();
 dotenv.config();
