@@ -58,7 +58,12 @@ app.get("/", (req, res) => {
 });
 
 app.get("/find/:id", (req, res) =>{
-    res.json(user_model.findById(req.params.id))
+    user_model.findById(req.params.id, (err, data) =>{
+        if(err) {
+                    console.log(`${err.message()}`)
+                }
+        res.json(data);
+    });
 });
 
 app.use("/section2", routes);
