@@ -66,6 +66,14 @@ app.get("/find/:id", (req, res) =>{
     });
 });
 
+app.delete("/delete/:username", (req, res) => {
+    user_model.deleteOne(req.params.username, (err) => {
+            if (err) {
+                    console.log(`${err.message()}`);
+                }
+        })
+});
+
 app.use("/section2", routes);
 
 
