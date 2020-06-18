@@ -60,18 +60,19 @@ app.get("/", (req, res) => {
 app.get("/find/:id", (req, res) =>{
     user_model.findById(req.params.id, (err, data) =>{
         if(err) {
-                    console.log(`${err.message()}`)
+                    console.log(`${err.message}`)
                 }
         res.json(data);
     });
 });
 
 app.delete("/delete/:username", (req, res) => {
-    user_model.deleteOne(req.params.username, (err) => {
+    user_model.deleteOne({username: req.params.username}, (err) => {
             if (err) {
-                    console.log(`${err.message()}`);
+                    console.log(`${err.message}`);
                 }
         })
+        res.send(`User ${req.params.username} deleted`);
 });
 
 app.use("/section2", routes);
