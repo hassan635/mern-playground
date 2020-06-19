@@ -75,6 +75,12 @@ app.delete("/delete/:username", (req, res) => {
         res.send(`User ${req.params.username} deleted`);
 });
 
+app.put("/updateuser/:id?username=dev&password=devdev", (req, res) => {
+    user_model.updateOne(
+            { username:  }
+        )
+})
+
 app.use("/section2", routes);
 
 
