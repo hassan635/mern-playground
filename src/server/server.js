@@ -66,6 +66,13 @@ app.get("/find/:id", (req, res) =>{
     });
 });
 
+app.post("/createuser", (req, res) => {
+    user_model.insert(req.body).catch((err) => {
+            console.log(err);
+        });
+    res.send("Record created");
+});
+
 app.delete("/delete/:username", (req, res) => {
     user_model.deleteOne({username: req.params.username}, (err) => {
             if (err) {
