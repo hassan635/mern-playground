@@ -76,8 +76,17 @@ app.delete("/delete/:username", (req, res) => {
 });
 
 app.put("/updateuser/:id/:password", (req, res) => {
-    user_model.findOneAndUpdate({id: req.params.id}, options.new=true)
-})
+    user_model.findOneAndUpdate(
+        {id: req.params.id},
+        {
+            $set: {
+                password: req.params.password
+            }
+            
+        },
+        {upsert: true}
+        );
+});
 
 app.use("/section2", routes);
 
