@@ -86,6 +86,7 @@ app.put("/updateuser/:id/:password", (req, res) => {
         },
         {upsert: true}
         );
+        res.send("Record Updated!")
 });
 
 app.use("/section2", routes);
