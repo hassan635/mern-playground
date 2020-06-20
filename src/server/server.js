@@ -77,7 +77,7 @@ app.delete("/delete/:username", (req, res) => {
 
 app.put("/updateuser/:id/:password", (req, res) => {
     user_model.findOneAndUpdate(
-        {id: req.params.id},
+        {_id: req.params.id},
         {
             $set: {
                 password: req.params.password
@@ -85,7 +85,7 @@ app.put("/updateuser/:id/:password", (req, res) => {
             
         },
         {upsert: true}
-        );
+        ).catch((err) => {console.log(err)});
         res.send("Record Updated!")
 });
 
