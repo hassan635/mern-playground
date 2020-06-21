@@ -67,9 +67,10 @@ app.get("/find/:id", (req, res) =>{
 });
 
 app.post("/createuser", (req, res) => {
-    user_model.insert(req.body).catch((err) => {
-            console.log(err);
-        });
+    user_model.create({username: req.body.username, password: req.body.password}, (err, data) =>{
+        if (err) {console.log(err)}
+        console.log(data);
+    });
     res.send("Record created");
 });
 
