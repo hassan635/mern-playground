@@ -66,6 +66,13 @@ app.get("/find/:id", (req, res) =>{
     });
 });
 
+app.get("/find/:username", (req, res) => {
+    user_model.find({username: req.params.username}, (err, data) => {
+        if (err) {console.log(err)}
+        res.json(data)
+    })
+});
+
 app.post("/createuser", (req, res) => {
     user_model.create({username: req.body.username, password: req.body.password}, (err, data) =>{
         if (err) {console.log(err)}
