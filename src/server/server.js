@@ -66,12 +66,9 @@ app.get("/find/:id", (req, res) =>{
     });
 });
 
-app.get("/find/:username", (req, res) => {
-    user_model.find({username: req.params.username}, (err, data) => {
-        if (err) {console.log(err);}
-        res.json(data);
-        //res.send(`username: ${data.username}, password: ${data.password}`);
-    })
+app.get("/findbyusername/:username", (req, res) => {
+    const users = user_model.find();
+    res.json(users);
 });
 
 app.post("/createuser", (req, res) => {
