@@ -68,8 +68,9 @@ app.get("/find/:id", (req, res) =>{
 
 app.get("/find/:username", (req, res) => {
     user_model.find({username: req.params.username}, (err, data) => {
-        if (err) {console.log(err)}
-        res.json(data)
+        if (err) {console.log(err);}
+        res.json(data);
+        //res.send(`username: ${data.username}, password: ${data.password}`);
     })
 });
 
