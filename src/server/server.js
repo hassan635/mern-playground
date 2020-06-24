@@ -75,6 +75,15 @@ app.get("/findbyusername/:username", (req, res) => {
     });
 });
 
+app.get("/findoneusername/:username", (req, res) => {
+    const users = user_model.findOne({username: req.params.username}, (err, data) => {
+        if (err) {
+                    console.log(err);
+                }
+        res.json(data);
+    });
+});
+
 app.post("/createuser", (req, res) => {
     user_model.create({username: req.body.username, password: req.body.password}, (err, data) =>{
         if (err) {console.log(err)}
