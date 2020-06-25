@@ -35,6 +35,7 @@ user_model.find({ username: 'dev' }).where({password: 'developer'}).count((err, 
 var app = express();
 dotenv.config();
 
+
 app.use((req, res, next) => {
     console.log("Yepee");
     next();
@@ -47,7 +48,12 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use("/section1", routes);
+//app.use("/section1", routes);
+
+app.set('views', './src/views');
+app.set('view engine', 'ejs');
+
+
 
 app.get("/", (req, res) => {
     if(process.env.GREETING==='islam')
@@ -57,6 +63,10 @@ app.get("/", (req, res) => {
     else {
             res.send("Halo");
         }
+});
+
+app.get("/register", (req,res) => {
+    res.render('register');
 });
 
 app.get("/find/:id", (req, res) =>{
