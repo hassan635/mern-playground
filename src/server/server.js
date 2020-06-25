@@ -3,6 +3,8 @@ var http = require('http');
 var dotenv = require('dotenv');
 var routes = require('../routes/routes.js');
 var mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 mongoose.connect("mongodb+srv://tezt:Windows.2000@cluster0-gpynn.mongodb.net/testdb?retryWrites=true&w=majority"
     , {useNewUrlParser: true, useUnifiedTopology: true});
