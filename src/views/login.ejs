@@ -2,8 +2,20 @@
     <body>
         <h1>Please Login</h1>
         <br/>
-        <input type="text" name="email"/>
-        <input type="password" name="password"/>
-        <input type="button" name="submit"/>
+        <form action="/login" method="POST">
+            <div>
+                <label for="email">Email:</label>
+                <input type="text" name="email"/>
+                <br/>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" name="password"/>
+                <br/>
+            </div>
+            <div>
+                <button type="submit" name="submit">Login</button>
+            </div>
+        </form>
     </body>
 </html>

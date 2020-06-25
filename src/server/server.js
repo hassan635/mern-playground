@@ -69,6 +69,10 @@ app.get("/register", (req,res) => {
     res.render('register');
 });
 
+app.get("/login", (req,res) => {
+    res.render('login');
+});
+
 app.get("/find/:id", (req, res) =>{
     user_model.findById(req.params.id, (err, data) =>{
         if(err) {
