@@ -52,7 +52,9 @@ app.use((req, res, next) => {
 
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
-
+app.use(express.urlencoded(
+    { extended: false }
+));
 
 
 app.get("/", (req, res) => {
@@ -71,6 +73,20 @@ app.get("/register", (req,res) => {
 
 app.get("/login", (req,res) => {
     res.render('login');
+});
+
+app.post("/login", (req,res) => {
+
+});
+
+app.post("/register", (req,res) => {
+    user_model.create({username: req.body.email, password: req.body.password}, (err, data) => {
+        if (err) {
+                    console.log(err);
+                }
+        console.log(`${req.body.email} registered successfully`)
+    });
+    res.redirect("/login");
 });
 
 app.get("/find/:id", (req, res) =>{
