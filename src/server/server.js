@@ -76,7 +76,15 @@ app.get("/login", (req,res) => {
 });
 
 app.post("/login", (req,res) => {
-
+    user_model.findOne(
+            { username: req.body.email, password: req.body.password }, (err, data) => {
+                if (err) {
+                    console.log(err);
+                    res.send('Login Failed!'); //IMPLEMENT EXISTS LOGIC
+                }
+                res.send(`Assalam-o-Alaikum ${data.username}`);
+            }
+        );
 });
 
 app.post("/register", (req,res) => {
