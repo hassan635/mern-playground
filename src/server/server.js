@@ -88,11 +88,16 @@ app.post("/login", (req,res) => {
 });
 
 app.post("/register", (req,res) => {
-    user_model.create({username: req.body.email, password: req.body.password}, (err, data) => {
+    bcrypt.hash(req.body.password, 12, (err, hash) => {
         if (err) {
                     console.log(err);
                 }
-        console.log(`${req.body.email} registered successfully`)
+        user_model.create({username: req.body.email, password: hash}, (err, data) => {
+            if (err) {
+                    console.log(err);
+                }
+        console.log(`${req.body.email} registered successfully with hash ${data.password}`);
+        });
     });
     res.redirect("/login");
 });
