@@ -85,6 +85,8 @@ app.post("/login", (req,res) => {
                 bcrypt.compare(req.body.password, data.password, (err, result)=>{
                     if (err) {
                             console.log(err);
+                            res.send('Invalid username or password');
+                            res.redirect("/login")
                         }
                     if(result == true)
                     {
