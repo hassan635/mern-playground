@@ -77,12 +77,21 @@ app.get("/login", (req,res) => {
 
 app.post("/login", (req,res) => {
     user_model.findOne(
-            { username: req.body.email, password: req.body.password }, (err, data) => {
+            { username: req.body.email}, (err, data) => {
                 if (err) {
                     console.log(err);
                     res.send('Login Failed!'); //IMPLEMENT EXISTS LOGIC
                 }
-                res.send(`Assalam-o-Alaikum ${data.username}`);
+                bcrypt.compare(req.body.password, data.password, (err, result)=>{
+                    if (err) {
+                            console.log(err);
+                        }
+                    if(result == true)
+                    {
+                        res.send(`Assalam-o-Alaikum ${data.username}`);
+                    }
+                });
+                
             }
         );
 });
