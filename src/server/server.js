@@ -5,8 +5,8 @@ var routes = require('../routes/routes.js');
 var mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const psconfig = require('./passport-config');
-const passport = require('passport-local');
+const initializePassport = require('./passport-config');
+const passport = require('passport');
 
 
 initializePassport(passport);
@@ -17,7 +17,6 @@ var schema = new mongoose.Schema({username: 'string', password: 'string'});
 
 var user_model = new mongoose.model('user', schema);
 var admin_user = new user_model({username: 'root', password: 'toor'});
-
 user_model.find({ username: 'dev' }).where({password: 'developer'}).count((err, count) => {
     if(err) {
             console.log(`Error occured while fetching record. Erro details: ${err.message()}`)
