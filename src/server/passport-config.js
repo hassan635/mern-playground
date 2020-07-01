@@ -1,3 +1,3 @@
-function initializePassport(passport){
+module.exports = function initializePassport(passport){
     
 }
