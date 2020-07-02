@@ -37,7 +37,14 @@ user_model.find({ username: 'dev' }).where({password: 'developer'}).count((err, 
 //        (err) => console.log(`Error occured: ${err.message()}`))
 
 passport.use(new psLocalStrategy((username, password, done) =>{
-    return done(null, "");
+    user_model.findOne(
+                { username: username }, (err, user) =>{
+                    if(err){return done(err);}
+                    if(!user){return done(null, false, {message: "Incorrect Username"});}
+                    if(!user.validPassword(password)) {return done(null, false, { message: "Invalid password" })}
+                    return done(null, user);
+                }
+            );
 }));
 
 var app = express();
