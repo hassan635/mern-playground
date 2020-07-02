@@ -7,9 +7,10 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const initializePassport = require('./passport-config');
 const passport = require('passport');
+const psLocalStrategy = require('passport-local').Strategy;
 
 
-initializePassport(passport);
+//initializePassport(passport);
 mongoose.connect("mongodb+srv://tezt:Windows.2000@cluster0-gpynn.mongodb.net/testdb?retryWrites=true&w=majority"
     , {useNewUrlParser: true, useUnifiedTopology: true});
 
@@ -34,6 +35,10 @@ user_model.find({ username: 'dev' }).where({password: 'developer'}).count((err, 
 //        {username: 'test', password: 'tester'}, 
 //        {username: 'auto', password: 'automator'}], 
 //        (err) => console.log(`Error occured: ${err.message()}`))
+
+passport.use(new psLocalStrategy((username, password, done) =>{
+    return done(null, "");
+}));
 
 var app = express();
 dotenv.config();
