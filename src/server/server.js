@@ -55,6 +55,11 @@ var app = express();
 dotenv.config();
 
 app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser((user, done) =>{
+    done(null, user.id);
+});
 
 app.use((req, res, next) => {
     console.log("Yepee");
