@@ -97,9 +97,9 @@ app.get("/", (req, res) => {
         }
 });
 
-app.get("/ses/:sessiondata", (req, res) => {
+app.get("/ses/:sessiondata", (req, res, next) => {
     req.session.sessiondata = req.params.sessiondata;
-    res.send("done");
+    next();
 })
 
 app.get("/showsd", (req, res) => {
