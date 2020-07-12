@@ -38,16 +38,16 @@ user_model.find({ username: 'dev' }).where({password: 'developer'}).count((err, 
 
 
 
-passport.use(new psLocalStrategy((username, password, done) =>{
-    user_model.findOne(
-                { username: username }, (err, user) =>{
-                    if(err){return done(err);}
-                    if(!user){return done(null, false, {message: "Incorrect Username"});}
-                    if(!(user.password == password)) {return done(null, false, { message: "Invalid password" })}
-                    return done(null, user);
-                }
-            );
-}));
+//passport.use(new psLocalStrategy((username, password, done) =>{
+//    user_model.findOne(
+//               { username: username }, (err, user) =>{
+//                    if(err){return done(err);}
+//                    if(!user){return done(null, false, {message: "Incorrect Username"});}
+//                    if(!(user.password == password)) {return done(null, false, { message: "Invalid password" })}
+//                    return done(null, user);
+//                }
+//            );
+//}));
 
 
 
@@ -57,9 +57,9 @@ dotenv.config();
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.serializeUser((user, done) =>{
-    done(null, user.id);
-});
+//passport.serializeUser((user, done) =>{
+//    done(null, user.id);
+//});
 
 app.use((req, res, next) => {
     console.log("Yepee");
@@ -100,13 +100,13 @@ app.get("/login", (req,res) => {
     res.render('login');
 });
 
-app.get("/sign-in", (req, res) =>{
-    res.render('sign-in');
-});
+//app.get("/sign-in", (req, res) =>{
+//    res.render('sign-in');
+//});
 
-app.post("/sign-in", passport.authenticate('local', { successRedirect: '/',
-failureRedirect: '/sign-in',
-failureFlash: true }));
+//app.post("/sign-in", passport.authenticate('local', { successRedirect: '/',
+//failureRedirect: '/sign-in',
+//failureFlash: true }));
 
 app.post("/login", (req,res) => {
     user_model.findOne(
