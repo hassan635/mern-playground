@@ -8,6 +8,7 @@ const bcrypt = require('bcrypt');
 const initializePassport = require('./passport-config');
 const passport = require('passport');
 const psLocalStrategy = require('passport-local').Strategy;
+const session = require('express-session');
 
 
 //initializePassport(passport);
@@ -54,6 +55,9 @@ user_model.find({ username: 'dev' }).where({password: 'developer'}).count((err, 
 var app = express();
 dotenv.config();
 
+app.use(session(
+        { secret: 'zecret' }
+    ))
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -82,6 +86,7 @@ app.use(express.urlencoded(
 ));
 
 
+
 app.get("/", (req, res) => {
     if(process.env.GREETING==='islam')
     {
@@ -91,6 +96,15 @@ app.get("/", (req, res) => {
             res.send("Halo");
         }
 });
+
+app.get("/ses/:sessiondata", (req, res) => {
+    req.session.sessiondata = req.params.sessiondata;
+    res.send("done");
+})
+
+app.get("/showsd", (req, res) => {
+    res.send(`${req.session.sessiondata}`)
+})
 
 app.get("/register", (req,res) => {
     res.render('register');
