@@ -102,7 +102,7 @@ app.get("/ses/:sessiondata", (req, res, next) => {
     next();
 })
 
-app.get("/showsd", (req, res) => {
+app.get("/showsessiondata", (req, res) => {
     res.send(`${req.session.sessiondata}`)
 })
 
