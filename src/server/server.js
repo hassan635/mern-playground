@@ -9,6 +9,9 @@ const initializePassport = require('./passport-config');
 const passport = require('passport');
 const psLocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
+const redis = require('redis');
+const redisClient = redis.createClient();
+const redisStore = require('connect-redis')(session);
 
 
 //initializePassport(passport);
@@ -55,11 +58,19 @@ user_model.find({ username: 'dev' }).where({password: 'developer'}).count((err, 
 var app = express();
 dotenv.config();
 
+redisClient.on('error', (err) => {
+    console.log('Redis error: ', err);
+  });
+
 app.use(session(
-        { secret: 'zecret' }
+        { secret: 'zecret',
+    name: 'redisredis',
+store: new redisStore({host: 'localhost', port: 6379, client: redisClient, ttl: 86400}) }
     ))
-app.use(passport.initialize());
-app.use(passport.session());
+
+
+//app.use(passport.initialize());
+//app.use(passport.session());
 
 //passport.serializeUser((user, done) =>{
 //    done(null, user.id);
